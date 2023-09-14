@@ -31,7 +31,7 @@ RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/co
   pugixml
 
 COPY --from=build /usr/src/forgottenserver/build/tfs \
-     /usr/src/forgottenserver/build/tfs/test_matrixarea* /usr/src/forgottenserver/build/src/test/test_xtea* \
+     /usr/src/forgottenserver/build/src/test/test_matrixarea* /usr/src/forgottenserver/build/src/test/test_xtea* \
      /bin/
 COPY data /srv/data/
 COPY LICENSE README.md *.dist *.sql key.pem /srv/
