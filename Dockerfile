@@ -9,7 +9,8 @@ RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/co
   luajit-dev \
   mariadb-connector-c-dev \
   pugixml-dev \
-  samurai
+  samurai \
+  git
 
 COPY cmake /usr/src/forgottenserver/cmake/
 COPY libdatachannel /usr/src/forgottenserver/libdatachannel/
@@ -31,7 +32,7 @@ RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/co
   pugixml
 
 COPY --from=build /usr/src/forgottenserver/build/tfs \
-     /usr/src/forgottenserver/build/src/test/test_matrixarea* /usr/src/forgottenserver/build/src/test/test_xtea* \
+     /usr/src/forgottenserver/build/src/tests/test_matrixarea* /usr/src/forgottenserver/build/src/tests/test_xtea* \
      /bin/
 COPY data /srv/data/
 COPY LICENSE README.md *.dist *.sql key.pem /srv/

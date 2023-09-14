@@ -46,6 +46,7 @@ bind_build_rtcforgottenserver:
     - when: manual
   script:
     - docker build . --tag rtcforgottenserver-$CI_COMMIT_SHA
+    - echo "rtcforgottenserver-$CI_COMMIT_SHA"
 
 
 run_test_matrixarea:
