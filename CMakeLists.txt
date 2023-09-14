@@ -11,9 +11,15 @@ if (DEFINED ENV{VCPKG_DEFAULT_TRIPLET} AND NOT DEFINED VCPKG_TARGET_TRIPLET)
     set(VCPKG_TARGET_TRIPLET "$ENV{VCPKG_DEFAULT_TRIPLET}" CACHE STRING "The vcpkg triplet")
 endif()
 
-project(tfs CXX)
+project(tfs
+        LANGUAGES C CXX)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
+include(cmake/UpdateSubmodules.cmake)
+
+add_subdirectory(libdatachannel)
+add_subdirectory(websocketpp)
 
 if (NOT WIN32)
     add_compile_options(-Wall -Wextra -Wnon-virtual-dtor -Wold-style-cast -pedantic -Werror -pipe -fvisibility=hidden)
@@ -73,9 +79,6 @@ include_directories(${Boost_INCLUDE_DIRS} ${Crypto++_INCLUDE_DIR} ${LUA_INCLUDE_
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-add_subdirectory(libdatachannel)
-add_subdirectory(websocketpp)
 
 add_subdirectory(src)
 add_executable(tfs ${tfs_MAIN})
