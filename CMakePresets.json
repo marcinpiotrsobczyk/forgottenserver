@@ -4,7 +4,13 @@
     {
       "name": "default",
       "description": "Generate Ninja project files",
-      "binaryDir": "${sourceDir}/build"
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "ENABLE_TESTING": {
+          "type": "BOOL",
+          "value": "ON"
+        }
+      }
     },
     {
       "name": "vcpkg",

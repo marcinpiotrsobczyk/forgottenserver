@@ -35,7 +35,7 @@ dind_build_rtcforgottenserver:
   rules:
     - when: manual
   script:
-    - docker build . --tag rtcforgottenserver
+    - docker build . --tag rtcforgottenserver-$CI_COMMIT_SHA
   resource_group: dind
 
 
@@ -45,4 +45,22 @@ bind_build_rtcforgottenserver:
   rules:
     - when: manual
   script:
-    - docker build . --tag rtcforgottenserver
+    - docker build . --tag rtcforgottenserver-$CI_COMMIT_SHA
+
+
+run_test_matrixarea:
+  stage: test
+  image:
+    name: rtcforgottenserver-$CI_COMMIT_SHA
+    entrypoint: [""]
+  script:
+    - /bin/test_matrixarea
+
+
+run_test_xtea:
+  stage: test
+  image:
+    name: rtcforgottenserver-$CI_COMMIT_SHA
+    entrypoint: [""]
+  script:
+    - /bin/test_xtea

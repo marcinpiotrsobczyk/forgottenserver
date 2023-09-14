@@ -12,6 +12,8 @@ RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/co
   samurai
 
 COPY cmake /usr/src/forgottenserver/cmake/
+COPY libdatachannel /usr/src/forgottenserver/libdatachannel/
+COPY websocketpp /usr/src/forgottenserver/websocketpp/
 COPY src /usr/src/forgottenserver/src/
 COPY CMakeLists.txt CMakePresets.json /usr/src/forgottenserver/
 WORKDIR /usr/src/forgottenserver
@@ -28,11 +30,13 @@ RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/co
   mariadb-connector-c \
   pugixml
 
-COPY --from=build /usr/src/forgottenserver/build/tfs /bin/tfs
+COPY --from=build /usr/src/forgottenserver/build/tfs \
+     /usr/src/forgottenserver/build/tfs/test_matrixarea* /usr/src/forgottenserver/build/src/test/test_xtea* \
+     /bin/
 COPY data /srv/data/
 COPY LICENSE README.md *.dist *.sql key.pem /srv/
 
-EXPOSE 7171 7172
+EXPOSE 7171 7172 7170
 WORKDIR /srv
 VOLUME /srv
 ENTRYPOINT ["/bin/tfs"]
